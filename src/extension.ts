@@ -5,12 +5,14 @@ import Highlight from './highlight'
 
 export function activate(context: ExtensionContext) {
     let highlight = new Highlight()
-    let configValues
+    let configValues: any
 
     commands.registerCommand('highlightwords.addRegExpHighlight', function () {
         window.showInputBox({ prompt: 'Enter expression' })
             .then(word => {
-                highlight.addRegExp(word)
+                if (word) {
+                    highlight.addRegExp(word)
+                }
             });
     });
 
@@ -31,7 +33,9 @@ export function activate(context: ExtensionContext) {
             }
         }))
             .then(word => {
-                highlight.remove(word)
+                if (word) {
+                    highlight.remove(word)
+                }
             })
     });
 
@@ -61,9 +65,12 @@ export function activate(context: ExtensionContext) {
         })
     })
     
-    function next(e, wrap?:boolean) {
-        const doc = window.activeTextEditor.document
-        const ed = window.activeTextEditor
+    function next(e: any, wrap?:boolean) {
+        const activeEditor = window.activeTextEditor
+        if (!activeEditor) return
+        
+        const doc = activeEditor.document
+        const ed = activeEditor
         const offset = wrap ? 0 : doc.offsetAt(ed.selection.active)
         const nextStart = wrap ? 0 : 1
         const text = doc.getText()
@@ -79,11 +86,13 @@ export function activate(context: ExtensionContext) {
             return
         }
         const word = slice.match(re)
+        if (!word) return
+        
         const start = doc.positionAt(pos+offset+nextStart)
         const end = new Position(start.line, start.character+word[0].length)
         const range = new Range(start, end)
-        window.activeTextEditor.revealRange(range)
-        window.activeTextEditor.selection = new Selection(start, start)
+        activeEditor.revealRange(range)
+        activeEditor.selection = new Selection(start, start)
         highlight.getLocationIndex(e.highlight.expression, range)
     }
 
@@ -91,9 +100,12 @@ export function activate(context: ExtensionContext) {
         next(e)
     });
 
-    function prev(e, wrap?:boolean) {
-        const doc = window.activeTextEditor.document
-        const ed = window.activeTextEditor
+    function prev(e: any, wrap?:boolean) {
+        const activeEditor = window.activeTextEditor
+        if (!activeEditor) return
+        
+        const doc = activeEditor.document
+        const ed = activeEditor
         const iAmHere = ed.selection.active
         const offset = doc.offsetAt(iAmHere)
         const text = doc.getText()
@@ -107,15 +119,15 @@ export function activate(context: ExtensionContext) {
             if(!wrap) {
                 if(offset !=0) {
                     const home = doc.positionAt(text.length-1)
-                    window.activeTextEditor.selection = new Selection(home, home)
+                    activeEditor.selection = new Selection(home, home)
                     prev(e, true)
                     return
                 }
             } else highlight.getLocationIndex(e.highlight.expression, new Range(new Position(1,1), new Position(1,1)))
         } 
-        let word 
-        let found
-        let index
+        let word: string = ''
+        let found: RegExpExecArray | null
+        let index: number = 0
 
         while ((found = re.exec(slice)) !== null) {
             index = re.lastIndex
@@ -123,12 +135,13 @@ export function activate(context: ExtensionContext) {
             console.log('last index', index)
           }
 
-
-        const start = doc.positionAt(index - word.length)
-        const range = new Range(start, start)
-        window.activeTextEditor.revealRange(range)
-        window.activeTextEditor.selection = new Selection(start, start)
-        highlight.getLocationIndex(e.highlight.expression, range)
+        if (word) {
+            const start = doc.positionAt(index - word.length)
+            const range = new Range(start, start)
+            activeEditor.revealRange(range)
+            activeEditor.selection = new Selection(start, start)
+            highlight.getLocationIndex(e.highlight.expression, range)
+        }
     }
 
     commands.registerCommand('highlightwords.findPrevious', e => {
@@ -164,7 +177,7 @@ export function activate(context: ExtensionContext) {
         }
     }, null, context.subscriptions);
 
-    var timeout: NodeJS.Timer = null;
+    var timeout: NodeJS.Timeout | null = null;
     function triggerUpdateDecorations() {
         if (timeout) {
             clearTimeout(timeout);

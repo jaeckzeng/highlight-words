@@ -21,7 +21,7 @@ class HighlightConfig {
     static getConfigValues() :ConfigValues {
         let config = workspace.getConfiguration('highlightwords')
         let colors: HighlightColors[] = <HighlightColors[]>config.get('colors');
-        let box = config.get<BoxOptions>('box')
+        let box = config.get<BoxOptions>('box') || { light: false, dark: true }
         const defaultMode = <number>config.get('defaultMode')
         const showSidebar = <boolean>config.get('showSidebar')
     

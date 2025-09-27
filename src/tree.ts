@@ -3,18 +3,18 @@ import  { Highlightable, SearchLocation } from './highlight'
 import { TreeDataProvider, TreeItem, Event, EventEmitter, Command } from 'vscode'
 
 class HighlightTreeProvider implements TreeDataProvider<HighlightNode> {
-    public currentExpression: string
-    public currentIndex: SearchLocation
-	private _onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>();
+    public currentExpression: string = ''
+    public currentIndex: SearchLocation = { index: 0, count: 0 }
+    private _onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>();
     readonly onDidChangeTreeData: Event<any> = this._onDidChangeTreeData.event;
     
     constructor(public words: Highlightable[]) {}
 
     getTreeItem(element: HighlightNode): TreeItem {
-		return element;
-	}
+        return element;
+    }
 
-	getChildren(element?: HighlightNode): Thenable<HighlightNode[]> {
+    getChildren(element?: HighlightNode): Thenable<HighlightNode[]> {
         let nodes: HighlightNode[] = this.words.map(w => {
             return new HighlightNode(w.expression, w, this)
         })
@@ -22,21 +22,21 @@ class HighlightTreeProvider implements TreeDataProvider<HighlightNode> {
     }
 
     public refresh(): any {
-		this._onDidChangeTreeData.fire();
-	}
+        this._onDidChangeTreeData.fire();
+    }
 
 }
 
 export class HighlightNode extends TreeItem {
 
-	constructor(
+    constructor(
         public readonly label: string,
         public readonly highlight: Highlightable,
         public provider: HighlightTreeProvider,
         public readonly command?: Command
 
-	) {
-		super(label);
+    ) {
+        super(label);
     }
     
     private getOpts(): string {
@@ -48,15 +48,11 @@ export class HighlightNode extends TreeItem {
                this.highlight.wholeWord ? 'wholeWord' : 'default' + index
     }
 
-	get tooltip(): string {
-		return `${this.label}-${this.getOpts()}`;
-	}
+    tooltip = `${this.label}-${this.getOpts()}`;
 
-	get description(): string {
-		return this.getOpts()
-	}
+    description = this.getOpts();
 
-	contextValue = 'highlights';
+    contextValue = 'highlights';
 
 }
 

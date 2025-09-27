@@ -25,9 +25,9 @@ const qpOptions = ['ignore case', 'whole word', 'both']
 class Highlight {
     private words: Highlightable[]
     private decorators: TextEditorDecorationType[]
-    private mode: number
+    private mode: number = 0
     private treeProvider: HighlightTreeProvider
-    private ranges: {}
+    private ranges: { [key: string]: Range[] } = {}
 
     constructor() {
         this.words = []
@@ -37,10 +37,10 @@ class Highlight {
         window.registerTreeDataProvider('hilightWordsExplore', this.treeProvider);
     }
 
-    public setMode(m) { this.mode = m }
+    public setMode(m: number) { this.mode = m }
     public getMode() { return this.mode }
     public getWords() { return this.words }
-    public setDecorators(d) { this.decorators = d }
+    public setDecorators(d: TextEditorDecorationType[]) { this.decorators = d }
 
     public getLocationIndex(expression: string, range: Range) {
         this.treeProvider.currentExpression = expression
@@ -55,14 +55,14 @@ class Highlight {
         this.treeProvider.refresh()
     }
 
-    public updateDecorations(active?) {
+    public updateDecorations(active?: boolean) {
         window.visibleTextEditors.forEach(editor => {
-            if (active && editor.document != window.activeTextEditor.document) return;
+            if (active && editor.document != window.activeTextEditor?.document) return;
             const text = editor.document.getText();
-            let match;
-            let decs = [];
+            let match: RegExpExecArray | null;
+            let decs: any[][] = [];
             this.decorators.forEach(function () {
-                let dec = [];
+                let dec: any[] = [];
                 decs.push(dec);
             });
             this.words.forEach((w, n) => {
@@ -109,7 +109,7 @@ class Highlight {
         this.updateDecorations(true)
     }
 
-    public updateOptions(word) {
+    public updateOptions(word: string) {
         window.showQuickPick(["default"].concat(qpOptions)).then(option => {
             if (!option) return;
 
@@ -126,6 +126,11 @@ class Highlight {
 
     public addSelected(withOptions?: boolean) {
         const editor = window.activeTextEditor;
+        if (!editor) {
+            window.showInformationMessage('No active editor!')
+            return;
+        }
+        
         let word = editor.document.getText(editor.selection);
         if(!word) {
             const range = editor.document.getWordRangeAtPosition(editor.selection.start)

@@ -1,21 +1,32 @@
 {
     "name": "highlight-words",
-    "displayName": "highlight-words",
+    "displayName": "highlight-words by jack",
     "description": "Highlight all occurrences of words or expressions",
     "version": "0.1.3",
     "icon": "images/highlight.png",
-    "publisher": "rsbondi",
+    "publisher": "jaeck-zj",
     "license": "MIT",
     "engines": {
-        "vscode": "^1.23.0"
+        "vscode": "^1.74.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/rsbondi/highlight-words"
+        "url": "https://github.com/jaeckzeng/highlight-words"
     },
     "categories": [
         "Other"
     ],
+    "keywords": [
+        "highlight",
+        "words",
+        "search",
+        "text",
+        "regex"
+    ],
+    "galleryBanner": {
+        "color": "#007ACC",
+        "theme": "dark"
+    },
     "activationEvents": [
         "onCommand:highlightwords.addHighlight",
         "onCommand:highlightwords.removeHighlight",
@@ -26,17 +37,22 @@
     ],
     "main": "./out/src/extension",
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "test": "node ./node_modules/vscode/bin/test",
+        "package": "vsce package",
+        "package:preview": "vsce package --pre-release"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.32",
-        "@types/node": "^6.0.40",
-        "mocha": "^5.2.0",
-        "typescript": "^2.1.4",
-        "vscode": "^1.1.33"
+        "@types/mocha": "^10.0.6",
+        "@types/node": "^20.10.0",
+        "@types/vscode": "^1.74.0",
+        "@vscode/test-electron": "^2.3.8",
+        "mocha": "^10.2.0",
+        "typescript": "^5.3.0",
+        "vscode": "^1.1.33",
+        "@vscode/vsce": "^2.22.0"
     },
     "contributes": {
         "commands": [
@@ -134,14 +150,14 @@
                 "highlightwords.box": {
                     "default": {
                         "light": false,
-                        "dark": true
+                        "dark": false
                     }
                 },
                 "highlightwords.defaultMode": {
                     "default": 0
                 },
                 "highlightwords.showSidebar": {
-                    "default": true
+                    "default": false
                 }
             }
         },
