@@ -1,5 +1,23 @@
 # Change Log
 
+## 0.1.4 (2025-05-07) - Icon Update
+- Updated to new custom icon (highlight-new.png) for better differentiation
+- Cleaned up unused image files in the images directory
+- Maintained all existing functionality and features
+
+## 0.1.3 (2025-05-07) - Fork Release (Migration First Version)
+- **FORK NOTICE**: This is now a community fork of the original highlight-words extension
+- **迁移第一版**: Initial migration from original extension with full differentiation
+- Updated display name to "Highlight Words Enhanced - Jack's Fork" to differentiate from original
+- Enhanced description to clearly indicate fork status and modern compatibility
+- Added new icon (highlight-enhanced.png) to differentiate from original extension
+- Updated keywords to include "fork", "enhanced", "modern", "windsurf", "cursor", "vscode" for better discovery
+- Completely rewrote README.md to clearly state fork status and highlight differences
+- Added sections for contributing, license, related extensions, and acknowledgments
+- Added support for VSCode, Windsurf, and Cursor editors
+- Maintained all original functionality while ensuring modern editor compatibility
+- This fork addresses VS Marketplace requirements for extension differentiation
+
 ## 0.1.2 (2019-03-16)
 - default mode on load
 

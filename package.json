@@ -1,9 +1,9 @@
 {
     "name": "highlight-words-by-jack",
-    "displayName": "highlight-words by jack",
-    "description": "Highlight all occurrences of words or expressions",
-    "version": "0.1.3",
-    "icon": "images/highlight.png",
+    "displayName": "Highlight Words Enhanced - Jack's Fork",
+    "description": "Enhanced word highlighting with modern VSCode/Windsurf/Cursor support - A community fork",
+    "version": "0.1.4",
+    "icon": "images/highlight-new.png",
     "publisher": "jaeck-zj",
     "license": "MIT",
     "engines": {
@@ -21,7 +21,13 @@
         "words",
         "search",
         "text",
-        "regex"
+        "regex",
+        "fork",
+        "enhanced",
+        "modern",
+        "windsurf",
+        "cursor",
+        "vscode"
     ],
     "galleryBanner": {
         "color": "#007ACC",

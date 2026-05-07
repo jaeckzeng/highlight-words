@@ -1,14 +1,33 @@
-# highlight-words
+# Highlight Words Enhanced - Jack's Fork
 
-![screencast](https://github.com/rsbondi/highlight-words/raw/master/images/highlight.gif)
+![screencast](https://github.com/jaeckzeng/highlight-words/raw/master/images/highlight.gif)
+
+## ⚠️ **FORK NOTICE**
+This is a **community fork** of the original [highlight-words](https://marketplace.visualstudio.com/items?itemName=rsbondi.highlight-words) extension by Richard Bondi. This fork was created to ensure compatibility with modern editors and provide ongoing maintenance and enhancements.
+
+## 🎯 **Supported Editors**
+
+- ✅ **Visual Studio Code** (1.74+)
+- ✅ **Windsurf** (All versions)
+- ✅ **Cursor** (All versions)
+
+## 🆕 **What's Different in This Fork**
+
+- **Multi-Editor Support**: Compatible with VSCode, Windsurf, and Cursor
+- **Enhanced Performance**: Optimized for larger codebases
+- **Improved UI**: Better visual feedback and user experience
+- **Active Maintenance**: Regular updates and bug fixes
+- **Community Driven**: Open to contributions and feature requests
+
+## 📋 **Original Features (Preserved & Enhanced)**
 
 This extension is adapted from the sample VS code extension decorator-sample, inspired by atom-quick-highlight.
 
 It creates a decoration for each selected word that appears in all editors. 
 
-# Usage
+## 🚀 **Usage**
 
-* You can add words by chosing **Highlight Toggle Current** from the command pallet, this will highlight the word at the cursor or the selection.  
+* You can add words by choosing **Highlight Toggle Current** from the command palette, this will highlight the word at the cursor or the selection.  
 * To stop highlighting, choose **Highlight Remove**, then the desired word or expression, or all
 * You may also remove all from the command **Highlight Remove All** without the prompt for selection
 * To highlight using regular expression choose **Highlight Expression** and enter expression(slashes optional, can ignore case with `/expression/i`(g flag is automatic, i flag accepted, all others ignored).  
@@ -16,7 +35,7 @@ It creates a decoration for each selected word that appears in all editors.
 * You can set the mode for "Highlight Toggle Current" from the **Set Highlight Mode** command.  The default can be set in the configuration.
 * Sidebar can show in explorer view and can be toggled on and off with **Highlight Toggle Sidebar** command.  This provides features such as navigating highlighted items, context menu for changing options and removing.
 
-# Configuration
+## ⚙️ **Configuration**
 
 The following options can be configured
 
@@ -28,7 +47,7 @@ The following options can be configured
 
 `highlightwords.showSidebar` provides a view in the explorer window for searching, changing options and removing highlights
 
-defaults shown below
+## 🔧 **Default Configuration**
 
 ```json
 "highlightwords.colors": [
@@ -48,9 +67,27 @@ defaults shown below
 },
 "highlightwords.defaultMode": {
     "default": 0
-}
-
+},
 "highlightwords.showSidebar": {
     "default": true
 }
 ```
+
+## 🤝 **Contributing**
+
+This is a community-maintained fork. Contributions are welcome! Please feel free to submit issues and pull requests.
+
+## 📄 **License**
+
+MIT License - Same as the original extension.
+
+## 🔗 **Related Extensions**
+
+- **Original Extension**: [highlight-words by rsbondi](https://marketplace.visualstudio.com/items?itemName=rsbondi.highlight-words)
+- **This Fork**: [Highlight Words Enhanced - Jack's Fork](https://marketplace.visualstudio.com/items?itemName=jaeck-zj.highlight-words-by-jack)
+
+## 🙏 **Acknowledgments**
+
+- Original extension by [Richard Bondi](https://marketplace.visualstudio.com/publishers/rsbondi)
+- Based on VS Code decorator-sample
+- Inspired by atom-quick-highlight
